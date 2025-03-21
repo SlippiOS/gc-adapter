@@ -60,3 +60,6 @@ typings/
 test.coffee
 noco-loader.js
 main.js
+
+#npm package directories
+dist/
