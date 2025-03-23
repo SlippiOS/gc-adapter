@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"main": "dist/index.js",
 	"types": "types/index.d.ts",
-	"description": "A JavaScript library for interacting with GameCube adapters on Node.js.",
+	"description": "A TypeScript library for interacting with GameCube adapters on Node.js.",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 0",
 		"build": "tsc"

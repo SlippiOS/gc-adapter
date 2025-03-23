@@ -7,8 +7,9 @@ export interface EndpointDetails {
 }
 
 export class Adapter {
-	private readonly ACTIVATE_ADAPTER_COMMAND = 0x13;
-	private readonly DEACTIVATE_ADAPTER_COMMAND = 0x14;
+	private readonly ACTIVATE_ADAPTER_COMMAND = new Uint8Array(0x13).buffer;
+	private readonly DEACTIVATE_ADAPTER_COMMAND = new Uint8Array(0x14).buffer;
+	private readonly IN_ENDPOINT = x14;
 	private readonly inEndpoint: EndpointDetails = {
 		address: 0x81,
 		maxPacketSize: 37,
@@ -32,13 +33,13 @@ export class Adapter {
 			filters: [{ vendorId: this.vendorId, productId: this.productId }],
 		});
 		if (!this.adapter) throw new Error("Device not found");
-		await this.adapter.open(); 
-		await this.adapter.claimInterface(0); 
-		this.adapter.selectConfiguration(1); 
+		await this.adapter.open();
+		await this.adapter.claimInterface(0);
+		this.adapter.selectConfiguration(1);
 		this.adapter.transferOut(
 			this.OutEndpoint.address,
-			new Uint8Array([this.ACTIVATE_ADAPTER_COMMAND]).buffer,
-		); 
+			this.ACTIVATE_ADAPTER_COMMAND,
+		);
 	}
 
 	private async readRaw(): Promise<Buffer | undefined> {
@@ -61,7 +62,7 @@ export class Adapter {
 	async stop() {
 		await this.adapter?.transferOut(
 			this.OutEndpoint.address,
-			new Uint8Array([this.DEACTIVATE_ADAPTER_COMMAND]).buffer,
+			this.DEACTIVATE_ADAPTER_COMMAND,
 		);
 		await this.adapter?.close();
 	}
