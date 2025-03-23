@@ -1,56 +1,58 @@
 {
-  "name": "gc-adapter",
-  "version": "1.0.0",
-  "main": "dist/index.js",
-  "types": "types/index.d.ts",
-  "description": "A JavaScript library for interacting with GameCube adapters on Node.js.",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 0",
-    "build": "tsc"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/rwendell/gc-adapter.git"
-  },
-  "files": [
-    "dist/*",
-    "types/*",
-    "README.md",
-    "LICENSE"
-  ],
-  "keywords": [
-    "gamecube",
-    "gca",
-    "controller",
-    "adapter",
-    "gamedev",
-    "webusb",
-    "node",
-    "nintendo",
-    "input",
-    "gamepad"
-  ],
-  "devDependencies": {
-    "@eslint/js": "^9.23.0",
-    "@types/node": "^22.13.11",
-    "eslint": "^9.22.0",
-    "globals": "^16.0.0",
-    "typescript": "^5.8.2",
-    "typescript-eslint": "^8.27.0"
-  },
-  "dependencies": {
-    "usb": "^2.15.0"
-  },
-  "author": "rwendell",
-  "license": "GPL-3.0",
-  "bugs": {
-    "url": "https://github.com/rwendell/gc-adapter/issues"
-  },
-  "homepage": "https://github.com/rwendell/gc-adapter#readme",
-  "engines": {
-    "node": ">=22.0.0"
-  },
-  "publishConfig": {
-    "access": "public"
-  }
+	"name": "gc-adapter",
+	"version": "1.0.0",
+	"main": "dist/index.js",
+	"types": "types/index.d.ts",
+	"description": "A JavaScript library for interacting with GameCube adapters on Node.js.",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 0",
+		"build": "tsc"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/rwendell/gc-adapter.git"
+	},
+	"files": [
+		"dist/*",
+		"types/*",
+		"README.md",
+		"LICENSE"
+	],
+	"keywords": [
+		"gamecube",
+		"gca",
+		"controller",
+		"adapter",
+		"gamedev",
+		"webusb",
+		"node",
+		"nintendo",
+		"input",
+		"gamepad"
+	],
+	"devDependencies": {
+		"@eslint/js": "^9.23.0",
+		"@types/node": "^22.13.11",
+		"eslint": "^9.22.0",
+		"eslint-config-prettier": "^10.1.1",
+		"globals": "^16.0.0",
+		"prettier": "^3.5.3",
+		"typescript": "^5.8.2",
+		"typescript-eslint": "^8.27.0"
+	},
+	"dependencies": {
+		"usb": "^2.15.0"
+	},
+	"author": "rwendell",
+	"license": "GPL-3.0",
+	"bugs": {
+		"url": "https://github.com/rwendell/gc-adapter/issues"
+	},
+	"homepage": "https://github.com/rwendell/gc-adapter#readme",
+	"engines": {
+		"node": ">=22.0.0"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
 }
