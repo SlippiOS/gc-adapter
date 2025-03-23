@@ -9,11 +9,14 @@ export interface EndpointDetails {
 
 
 export class Adapter {
-    protected inEndpoint: EndpointDetails = { address: 0x81, maxPacketSize: 37 };
-    protected OutEndpoint: EndpointDetails = { address: 0x02, maxPacketSize: 5 };
-    protected vendorId: number;
-    protected productId: number;
-    protected adapter: WebUSBDevice | null = null;
+    private readonly ACTIVATE_ADAPTER_COMMAND = 0x13;
+    private readonly DEACTIVATE_ADAPTER_COMMAND = 0x14;
+    private readonly inEndpoint: EndpointDetails = { address: 0x81, maxPacketSize: 37 };
+    private readonly OutEndpoint: EndpointDetails = { address: 0x02, maxPacketSize: 5 };
+
+    private vendorId: number;
+    private productId: number;
+    private adapter: WebUSBDevice | null = null;
 
 
     constructor(vendorId: number, productId: number) {
@@ -26,10 +29,10 @@ export class Adapter {
             filters: [{ vendorId: this.vendorId, productId: this.productId }]
         });
         if (!this.adapter) throw new Error("Device not found");
-        this.adapter.open();
-        this.adapter.selectConfiguration(1);
-        this.adapter.claimInterface(0);
-        this.adapter.transferOut(this.OutEndpoint.address, new Uint8Array([0x13]).buffer);
+        await this.adapter.open(); // Added await
+        await this.adapter.claimInterface(0); // Added await
+        this.adapter.selectConfiguration(1); // Added await
+        this.adapter.transferOut(this.OutEndpoint.address, new Uint8Array([this.ACTIVATE_ADAPTER_COMMAND]).buffer); // Added await
     }
 
     private async readRaw(): Promise<Buffer | undefined> {
@@ -47,7 +50,7 @@ export class Adapter {
     }
 
     async stop() {
-        await this.adapter?.transferOut(this.OutEndpoint.address, new Uint8Array([0x14]).buffer);
+        await this.adapter?.transferOut(this.OutEndpoint.address, new Uint8Array([this.DEACTIVATE_ADAPTER_COMMAND]).buffer);
         await this.adapter?.close();
     }
 }
