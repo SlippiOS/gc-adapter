@@ -32,13 +32,13 @@ export class Adapter {
 			filters: [{ vendorId: this.vendorId, productId: this.productId }],
 		});
 		if (!this.adapter) throw new Error("Device not found");
-		await this.adapter.open(); // Added await
-		await this.adapter.claimInterface(0); // Added await
-		this.adapter.selectConfiguration(1); // Added await
+		await this.adapter.open(); 
+		await this.adapter.claimInterface(0); 
+		this.adapter.selectConfiguration(1); 
 		this.adapter.transferOut(
 			this.OutEndpoint.address,
 			new Uint8Array([this.ACTIVATE_ADAPTER_COMMAND]).buffer,
-		); // Added await
+		); 
 	}
 
 	private async readRaw(): Promise<Buffer | undefined> {
